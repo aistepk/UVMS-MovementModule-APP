@@ -39,6 +39,7 @@ import javax.ws.rs.core.Response;
 public class ConfigResource {
 
     private static final Logger LOG = LoggerFactory.getLogger(ConfigResource.class);
+    public static final String ERROR_GETTING_CONFIG_SEARCH_FIELDS = "[ Error when getting config search fields. ] {} {}";
 
     @GET
     @Path(value = "/movementTypes")
@@ -46,7 +47,7 @@ public class ConfigResource {
         try {
             return Response.ok(MovementTypeType.values()).build();
         } catch (Exception e) {
-            LOG.error("[ Error when getting config search fields. ] {} {}", e.getLocalizedMessage(), e.getStackTrace());
+            LOG.error(ERROR_GETTING_CONFIG_SEARCH_FIELDS, e.getLocalizedMessage(), e.getStackTrace());
             throw e;
         }
     }
@@ -57,7 +58,7 @@ public class ConfigResource {
         try {
             return Response.ok(SegmentCategoryType.values()).build();
         } catch (Exception e) {
-            LOG.error("[ Error when getting config search fields. ] {} {}", e.getLocalizedMessage(), e.getStackTrace());
+            LOG.error(ERROR_GETTING_CONFIG_SEARCH_FIELDS, e.getLocalizedMessage(), e.getStackTrace());
             throw e;
         }
     }
@@ -68,7 +69,7 @@ public class ConfigResource {
         try {
             return Response.ok(SearchKeyType.values()).build();
         } catch (Exception e) {
-            LOG.error("[ Error when getting config search fields. ] {} {}", e.getLocalizedMessage(), e.getStackTrace());
+            LOG.error(ERROR_GETTING_CONFIG_SEARCH_FIELDS, e.getLocalizedMessage(), e.getStackTrace());
             throw e;
         }
     }
@@ -79,7 +80,7 @@ public class ConfigResource {
         try {
             return Response.ok(MovementSourceType.values()).build();
         } catch (Exception e) {
-            LOG.error("[ Error when getting config search fields. ] {} {}", e.getLocalizedMessage(), e.getStackTrace());
+            LOG.error(ERROR_GETTING_CONFIG_SEARCH_FIELDS, e.getLocalizedMessage(), e.getStackTrace());
             throw e;
         }
     }
@@ -90,7 +91,7 @@ public class ConfigResource {
         try {
             return Response.ok(MovementActivityTypeType.values()).build();
         } catch (Exception e) {
-            LOG.error("[ Error when getting config search fields. ] {} {}", e.getLocalizedMessage(), e.getStackTrace());
+            LOG.error(ERROR_GETTING_CONFIG_SEARCH_FIELDS, e.getLocalizedMessage(), e.getStackTrace());
             throw e;
         }
     }
@@ -100,7 +101,7 @@ public class ConfigResource {
         try {
             return Response.ok(MovementMockConfig.getValues()).build();
         } catch (Exception e) {
-            LOG.error("[ Error when getting config search fields. ] {} {}", e.getLocalizedMessage(), e.getStackTrace());
+            LOG.error(ERROR_GETTING_CONFIG_SEARCH_FIELDS, e.getLocalizedMessage(), e.getStackTrace());
             throw e;
         }
     }
