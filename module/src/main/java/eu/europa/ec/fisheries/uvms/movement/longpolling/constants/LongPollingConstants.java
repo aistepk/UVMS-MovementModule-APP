@@ -13,6 +13,9 @@ package eu.europa.ec.fisheries.uvms.movement.longpolling.constants;
 
 public class LongPollingConstants {
 
+    private LongPollingConstants() {
+    }
+
     public static final String MOVEMENT_PATH = "/activity/movement";
 
     public static final String MANUAL_MOVEMENT_PATH = "/activity/movement/manual";
