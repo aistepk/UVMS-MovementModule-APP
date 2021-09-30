@@ -42,6 +42,7 @@ import java.util.stream.Collectors;
 public class AlarmRestResource {
 
     private static final Logger LOG = LoggerFactory.getLogger(AlarmRestResource.class);
+    public static final String REQUEST_ID = "requestId";
 
     @EJB
     private MovementSanityValidatorBean validationService;
@@ -56,7 +57,7 @@ public class AlarmRestResource {
         try {
             LOG.info("Get alarm list invoked in rest layer");
             AlarmListResponseDto alarmList = validationService.getAlarmList(query);
-            return Response.ok(alarmList).header("MDC", MDC.get("requestId")).build();
+            return Response.ok(alarmList).header("MDC", MDC.get(REQUEST_ID)).build();
         }catch (Exception e){
             LOG.error("Unable to get alarm list due to: {}", e);
             throw e;
@@ -69,7 +70,7 @@ public class AlarmRestResource {
         try {
             LOG.info("Update alarm status invoked in rest layer");
             AlarmReport updated = validationService.updateAlarmStatus(alarmReport);
-            return Response.ok(updated).header("MDC", MDC.get("requestId")).build();
+            return Response.ok(updated).header("MDC", MDC.get(REQUEST_ID)).build();
         }catch (Exception e){
             LOG.error("Unable to update alarm status due to: {}", e);
             throw e;
@@ -83,7 +84,7 @@ public class AlarmRestResource {
         try {
             LOG.info("Update incomingMovement in holding table");
             IncomingMovement updated = validationService.updateIncomingMovement(movement);
-            return Response.ok(updated).header("MDC", MDC.get("requestId")).build();
+            return Response.ok(updated).header("MDC", MDC.get(REQUEST_ID)).build();
         }catch (Exception e){
             LOG.error("Unable to update incoming movement due to: {}", e);
             throw e;
@@ -96,7 +97,7 @@ public class AlarmRestResource {
     public Response getAlarmReportByGuid(@PathParam("guid") UUID guid) {
         try {
             AlarmReport byGuid = validationService.getAlarmReportByGuid(guid);
-            return Response.ok(byGuid).header("MDC", MDC.get("requestId")).build();
+            return Response.ok(byGuid).header("MDC", MDC.get(REQUEST_ID)).build();
         }catch (Exception e){
             LOG.error("Unable to get alarm report due to: {}", e);
             throw e;
@@ -110,7 +111,7 @@ public class AlarmRestResource {
         try {
             LOG.info("Reprocess alarm invoked in rest layer");
             validationService.reprocessAlarm(alarmGuidList, request.getRemoteUser());
-            return Response.ok().header("MDC", MDC.get("requestId")).build();
+            return Response.ok().header("MDC", MDC.get(REQUEST_ID)).build();
         }catch (Exception e){
             LOG.error("Unable to reprocess alarm due to {}", e);
             throw e;
@@ -123,7 +124,7 @@ public class AlarmRestResource {
     public Response getNumberOfOpenAlarmReports() {
         try {
             long count = validationService.getNumberOfOpenAlarmReports();
-            return Response.ok(count).header("MDC", MDC.get("requestId")).build();
+            return Response.ok(count).header("MDC", MDC.get(REQUEST_ID)).build();
         }catch (Exception e){
             LOG.error("Unable to get the number of open alarms due to: {}", e);
             throw e;
@@ -137,6 +138,6 @@ public class AlarmRestResource {
         List<String> sanityRuleNames = Arrays.stream(SanityRule.values())
                 .map(SanityRule::getRuleName)
                 .collect(Collectors.toList());
-        return Response.ok(sanityRuleNames).header("MDC", MDC.get("requestId")).build();
+        return Response.ok(sanityRuleNames).header("MDC", MDC.get(REQUEST_ID)).build();
     }
 }
